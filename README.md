@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🛍️ TEMU Clone | Modern E-Commerce Platform
 [<img src="assets/thumbnail.jpg" target="_blank">](https://www.youtube.com/watch?v=-_-kvPiMybw)
 
@@ -98,4 +98,4 @@ This is a project built for educational purposes. It's not affiliated with TEMU.
 =======
 # temu-clon
 Next 15 Temu Clone project
->>>>>>> ad262d98f9d72da15733fb1cf0eff8c6f4685ba2
+>>>>>>> 
