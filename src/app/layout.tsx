@@ -27,7 +27,7 @@ const RootLayout = async ({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased bg-white min-h-[125vh]`}>
+      <body className={`${inter.className} antialiased min-h-[125vh] transition-colors`}>
         <Header user={user} categorySelector={<HeaderCategorySelector />} />
         <Script
           src="https://cloud.umami.is/script.js"
