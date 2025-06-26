@@ -155,7 +155,7 @@ const Cart = () => {
                     {/* Cart Header */}
                     <div className='flex items-center justify-between p-4 border-b bg-gray-50'>
                         <div className='flex items-center gap-2'>
-                            <ShoppingCart className='w-5 h-5' />
+                            <ShoppingCart className='w-5 h-5 animate-bounce' />
                             <h2 className='text-lg font-semibold'>Shopping Cart</h2>
                             <span className='bg-gray-200 px-2 py-1 rounded-full text-sm font-medium'>
                                 {getTotalItems()}
