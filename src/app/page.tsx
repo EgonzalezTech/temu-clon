@@ -20,10 +20,7 @@ const Home = async () => {
     <div>
       <ThemeContextProvider>
         <SalesCampaignBanner />
-        {/* <WheelOfFortune
-            products={randomProducts}
-            winningIndex={winningIndex}
-          /> */}
+        <WheelOfFortune products={randomProducts} winningIndex={winningIndex} />
 
         <section className="container mx-auto py-8">
           <ProductGrid products={products} />

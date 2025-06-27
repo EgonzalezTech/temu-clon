@@ -10,6 +10,10 @@ import Script from "next/script";
 import { Suspense } from "react";
 import AnalyticsTracker from "@/components/layout/AnalyticsTracker";
 import Footer from "@/components/layout/Footer";
+import { ThemeContextProvider } from "@/components/Contexts/ThemeContext";
+import Theme from "@/components/Theme/Theme";
+import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
+import { I18nProviderClient } from "@/components/Contexts/I18nProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,23 +31,32 @@ const RootLayout = async ({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased min-h-[125vh] transition-colors`}>
-        <Header user={user} categorySelector={<HeaderCategorySelector />} />
-        <Script
-          src="https://cloud.umami.is/script.js"
-          data-website-id="(YOUR UMAMI WEBSITE ID)"
-          strategy="beforeInteractive"
-        />
+      <body
+        className={`${inter.className} antialiased min-h-[125vh] transition-colors`}
+      >
+        <I18nProviderClient>
+          <ThemeContextProvider>
+            <Header user={user} categorySelector={<HeaderCategorySelector />} />
 
-        <Suspense>
-          <AnalyticsTracker user={user} />
-        </Suspense>
+            <Script
+              src="https://cloud.umami.is/script.js"
+              data-website-id="(YOUR UMAMI WEBSITE ID)"
+              strategy="beforeInteractive"
+            />
+            <Suspense>
+              <AnalyticsTracker user={user} />
+            </Suspense>
 
-        {children}
+            {children}
 
-        <Cart />
-        <SanityLive />
-        <Footer />
+            <Cart />
+            <SanityLive />
+            <Footer />
+
+            <Theme />
+            <ScrollToTopButton />
+          </ThemeContextProvider>
+        </I18nProviderClient>
       </body>
     </html>
   );
