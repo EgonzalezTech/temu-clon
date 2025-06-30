@@ -64,7 +64,7 @@ const Header = ({ user, categorySelector }: HeaderProps) => {
   }, [prevScrollY]);
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    i18n.changeLanguage(e.target.value);
+    //i18n.changeLanguage(e.target.value);
   };
 
   return (
