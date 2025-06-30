@@ -1,32 +1,40 @@
-"use client";
-
+// i18n.ts
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import HttpBackend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import en from "../app/locales/en.json";
-import es from "../app/locales/es.json";
-import fr from "../app/locales/fr.json";
-
-if (!i18n.isInitialized) {
-  i18n
-    .use(LanguageDetector) // ✅ Habilita la detección automática
-    .use(initReactI18next)
-    .init({
-      fallbackLng: "en", // ✅ Idioma por defecto si no detecta nada
-      interpolation: {
-        escapeValue: false, // ✅ necesario para React
-      },
-      resources: {
-        en: { translation: en },
-        es: { translation: es },
-        fr: { translation: fr },
-      },
-      detection: {
-        order: ["navigator", "htmlTag", "cookie", "localStorage", "sessionStorage", "querystring"],
-        caches: ["localStorage", "cookie"],
-      },
-    });
-}
+i18n
+  .use(HttpBackend) // Carga traducciones desde un servidor HTTP
+  .use(LanguageDetector) // Detecta el idioma del navegador
+  .use(initReactI18next) // Pasa la instancia de i18n a react-i18next
+  .init({
+    fallbackLng: "es", // Idioma de respaldo si la traducción no existe
+    debug: process.env.NODE_ENV === "development", // Habilita el modo debug en desarrollo
+    interpolation: {
+      escapeValue: false, // React ya escapa los valores
+    },
+    backend: {
+      // Ruta desde donde i18next cargará los archivos de traducción
+      // Los archivos deben estar en `/public/locales/{{lng}}/{{ns}}.json`
+      loadPath: "/locales/{{lng}}/{{ns}}.json",
+    },
+    detection: {
+      order: [
+        "queryString",
+        "cookie",
+        "localStorage",
+        "navigator",
+        "htmlTag",
+        "path",
+        "subdomain",
+      ],
+      caches: ["cookie"], // Almacena el idioma detectado en una cookie
+    },
+    // Definimos los namespaces (espacios de nombres) por defecto
+    // 'common' es un buen punto de partida para traducciones generales
+    ns: ["common"],
+    defaultNS: "common",
+  });
 
 export default i18n;
